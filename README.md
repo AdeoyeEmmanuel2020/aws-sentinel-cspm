@@ -26,7 +26,7 @@
 - [Module Documentation](#module-documentation)
 - [Compliance Alignment](#compliance-alignment)
 - [Deployed Infrastructure](#deployed-infrastructure)
-- [Terminal CLI Evidence](#Terminal-CLI-Evidence)
+- [Terminal CLI Evidence](#terminal-cli-evidence)
 - [AWS Console Evidence](#AWS-Console-Evidence)
 - [Destroy Infrastructure](#destroy-infrastructure)
 - [Enabling GuardDuty and Security Hub](#enabling-guardduty-and-security-hub)
