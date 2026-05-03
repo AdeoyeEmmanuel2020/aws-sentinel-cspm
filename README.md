@@ -25,7 +25,6 @@
 - [Quick Start](#quick-start)
 - [Module Documentation](#module-documentation)
 - [Compliance Alignment](#compliance-alignment)
-- [Deployed Infrastructure](#deployed-infrastructure)
 - [Deployment Screenshots](#Deployment-Screenshots)
 - [Destroy Infrastructure](#destroy-infrastructure)
 - [Enabling GuardDuty and Security Hub](#enabling-guardduty-and-security-hub)
@@ -480,19 +479,6 @@ Lambda Function (Python 3.12)
 | A.16.1 — Incident management | Incident response | Lambda auto-remediation |
 
 ---
-
-# Deployed Infrastructure — Live Resource IDs
-
-| Resource | AWS Service | Resource ID |
-|----------|------------|------------|
-| Security Logging Trail | CloudTrail | `aws-sentinel-trail` |
-| Encryption Key | KMS | `c3e1471e-77fe-4bdf-9c31-e7e148606bc5` |
-| IAM Policy Analyzer | IAM Access Analyzer | `aws-sentinel-access-analyzer` |
-| Log Storage Bucket | S3 | `aws-sentinel-security-logs-1fd401fe` |
-| Secure Network | VPC | `vpc-0ceaa75bd8e301568` |
-| Auto-Remediation Function | Lambda | `aws-sentinel-auto-remediation` |
-
--------
 
 # Deployment Screenshots
 
