@@ -14,20 +14,25 @@
 </div>
 
 ----
-# Table of Contents
-- [About This Project](#About-This-Project)
-- [Architecture](#Architecture)
-- [Architecture Decisions & Rationale](#Architecture-Decisions--Rationale)
-- [Security-Controls-Implemented](#Security-Controls-Implemented)
-- [Project Structure](#Project-Structure)
-- [Prerequisites](#Prerequisites)
-- [Quick Start](#Quick-Start)
-- [Module Documentation](#Module-Documentation)
-- [Compliance Alignment](#Compliance-Alignment)
-- [Deployment Screenshots](#Deployment-Screenshots)
-- [Contributing](#Contributing)
-- [License](#License)
+## 📋 Table of Contents
 
+- [About This Project](#about-this-project)
+- [Architecture](#architecture)
+- [Architecture Decisions and Rationale](#architecture-decisions--rationale)
+- [Security Controls Implemented](#security-controls-implemented)
+- [Project Structure](#project-structure)
+- [Prerequisites](#prerequisites)
+- [Quick Start](#quick-start)
+- [Module Documentation](#module-documentation)
+- [Compliance Alignment](#compliance-alignment)
+- [Deployed Infrastructure](#deployed-infrastructure--live-resource-ids)
+- [📸 Screenshots — Terminal CLI Evidence](#-terminal-evidence-cli)
+- [📸 Screenshots — AWS Console Evidence](#-aws-console-evidence)
+- [Destroy Infrastructure](#destroy-infrastructure)
+- [Enabling GuardDuty and Security Hub](#enabling-guardduty-and-security-hub)
+- [Contributing](#contributing)
+- [Author](#author)
+- [License](#license)
 ---
 
 ##  About This Project
