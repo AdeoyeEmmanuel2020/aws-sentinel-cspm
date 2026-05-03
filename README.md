@@ -26,7 +26,7 @@
 - [Module Documentation](#module-documentation)
 - [Compliance Alignment](#compliance-alignment)
 - [Deployed Infrastructure](#deployed-infrastructure)
-- [Terminal CLI Evidence](#terminal-cli-evidence)
+- [Command Line Evidence Report](#Command-Line-Evidence-Report)
 - [AWS Console Evidence](#AWS-Console-Evidence)
 - [Destroy Infrastructure](#destroy-infrastructure)
 - [Enabling GuardDuty and Security Hub](#enabling-guardduty-and-security-hub)
@@ -497,7 +497,7 @@ Lambda Function (Python 3.12)
 
 All 25 screenshots are real AWS Console and CLI outputs from the live deployment.
 
-**Terminal CLI Evidence**
+**Command Line Evidence Report**
 
 | # | What It Proves | View |
 |---|---|---|
