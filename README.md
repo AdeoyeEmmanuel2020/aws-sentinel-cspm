@@ -14,7 +14,7 @@
 </div>
 
 ----
-## 📋 Table of Contents
+# Table of Contents
 
 - [About This Project](#about-this-project)
 - [Architecture](#architecture)
@@ -25,9 +25,9 @@
 - [Quick Start](#quick-start)
 - [Module Documentation](#module-documentation)
 - [Compliance Alignment](#compliance-alignment)
-- [Deployed Infrastructure](#deployed-infrastructure--live-resource-ids)
-- [📸 Screenshots — Terminal CLI Evidence](#-terminal-evidence-cli)
-- [📸 Screenshots — AWS Console Evidence](#-aws-console-evidence)
+- [Deployed Infrastructure](#deployed-infrastructure)
+- [Screenshots — Terminal CLI Evidence](#Screenshots—Terminal-CLI-Evidence)
+- [Screenshots — AWS Console Evidence](#Screenshots—AWS-Console-Evidence)
 - [Destroy Infrastructure](#destroy-infrastructure)
 - [Enabling GuardDuty and Security Hub](#enabling-guardduty-and-security-hub)
 - [Contributing](#contributing)
@@ -35,12 +35,12 @@
 - [License](#license)
 ---
 
-##  About This Project
+#  About This Project
 **Security Solutions Architect Perspective**
 
 This project was designed, architected, and implemented from the perspective of a **Cloud Security Solutions Architect** — not simply a cloud engineer running tutorials. Every decision made in this codebase reflects real-world enterprise security thinking: threat modelling, defence-in-depth, compliance alignment, least-privilege enforcement, and automated incident response.
 
-### The Problem This Solves
+ **The Problem This Solves**
 
 Organisations migrating to AWS frequently face three critical security gaps:
 
@@ -50,7 +50,7 @@ Organisations migrating to AWS frequently face three critical security gaps:
 
 AWS Sentinel addresses all three gaps in a single, Terraform-provisioned, production-ready platform.
 
-### My Role on This Project
+**My Role on This Project**
 
 | Responsibility | Detail |
 |---|---|
@@ -86,9 +86,9 @@ Capturing only REJECT traffic misses accepted-but-suspicious lateral movement. L
 
 ---
 
-## Security Controls Implemented
+# Security Controls Implemented
 
-### Defence-in-Depth Matrix
+**Defence-in-Depth Matrix**
 
 | Layer | Control | Service | Compliance Mapping |
 |-------|---------|---------|-------------------|
@@ -110,7 +110,7 @@ Capturing only REJECT traffic misses accepted-but-suspicious lateral movement. L
 
 ---
 
-## Project Structure
+# Project Structure
 
 ```
 aws-sentinel-cspm/
@@ -200,7 +200,7 @@ aws-sentinel-cspm/
 
 ---
 
-## Prerequisites
+# Prerequisites
 
 | Tool | Minimum Version | Purpose | Install Guide |
 |------|----------------|---------|--------------|
@@ -210,10 +210,8 @@ aws-sentinel-cspm/
 | Git | Any | Version control | [git-scm.com](https://git-scm.com) |
 | AWS Account | — | Target deployment environment | With IAM permissions listed below |
 
-### Required IAM Permissions
-
+**Required IAM Permissions**
 The AWS user or role running Terraform must have permissions for:
-
 ```
 cloudtrail:*, guardduty:*, securityhub:*, 
 accessanalyzer:*, kms:*, s3:*, ec2:*, 
@@ -225,16 +223,16 @@ For demo/personal accounts, `AdministratorAccess` is acceptable. For production,
 
 ---
 
-## Quick Start
+# Quick Start
 
-### Step 1 — Clone the Repository
+**Step 1 — Clone the Repository**
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/aws-sentinel-cspm.git
 cd aws-sentinel-cspm
 ```
 
-### Step 2 — Configure AWS Credentials
+**Step 2 — Configure AWS Credentials**
 
 ```bash
 aws configure
@@ -247,7 +245,7 @@ aws configure
 aws sts get-caller-identity
 ```
 
-### Step 3 — Configure Your Variables
+**Step 3 — Configure Your Variables**
 
 ```bash
 # Open terraform.tfvars and set your values
@@ -265,7 +263,7 @@ enable_guardduty    = false                        # set true if account support
 enable_security_hub = false                        # set true if account supports it
 ```
 
-### Step 4 — Deploy
+**Step 4 — Deploy**
 
 ```bash
 # Initialise providers and modules
@@ -278,7 +276,7 @@ terraform plan
 terraform apply -auto-approve
 ```
 
-### Step 5 — Verify Deployment
+**Step 5 — Verify Deployment**
 
 ```bash
 terraform output
@@ -296,9 +294,9 @@ vpc_id                = "vpc-XXXXXXXXXXXXXXXXX"
 
 ---
 
-## Module Documentation
+# Module Documentation
 
-### `modules/kms` — Encryption Foundation
+**`modules/kms` — Encryption Foundation**
 
 **Purpose:** Creates the Customer Managed Key that underpins all encryption across the platform.
 
@@ -312,9 +310,8 @@ vpc_id                = "vpc-XXXXXXXXXXXXXXXXX"
 - `aws_kms_key` — CMK with custom key policy
 - `aws_kms_alias` — Human-readable alias `alias/aws-sentinel-key`
 
----
 
-### `modules/vpc` — Zero-Trust Network Layer
+ **`modules/vpc` — Zero-Trust Network Layer**
 
 **Purpose:** Builds a network perimeter that assumes breach — no workload is ever directly internet-accessible.
 
@@ -332,9 +329,8 @@ vpc_id                = "vpc-XXXXXXXXXXXXXXXXX"
 - `aws_network_acl` — HTTPS-only rules at subnet boundary
 - `aws_flow_log` — ALL traffic to CloudWatch (90-day retention)
 
----
 
-### `modules/s3-secure` — Encrypted Log Storage
+ **`modules/s3-secure` — Encrypted Log Storage**
 
 **Purpose:** Provides tamper-resistant, encrypted, cost-optimised storage for all security logs.
 
@@ -354,9 +350,7 @@ vpc_id                = "vpc-XXXXXXXXXXXXXXXXX"
 - `aws_s3_bucket_policy` — Deny non-SSL + Allow CloudTrail writes
 - `aws_s3_bucket_logging` — Server access logs to a separate bucket
 
----
-
-### `modules/cloudtrail` — API Audit Logging
+**`modules/cloudtrail` — API Audit Logging**
 
 **Purpose:** Creates an immutable audit trail of every API call made in the AWS account.
 
@@ -371,9 +365,7 @@ vpc_id                = "vpc-XXXXXXXXXXXXXXXXX"
 - `aws_cloudwatch_log_group` — CloudTrail log group (90-day retention)
 - `aws_iam_role` — Scoped role for CloudTrail → CloudWatch delivery
 
----
-
-### `modules/guardduty` — Threat Detection
+**`modules/guardduty` — Threat Detection**
 
 **Purpose:** Continuous ML-based threat detection across AWS account activity, network traffic, and data access.
 
@@ -390,9 +382,7 @@ vpc_id                = "vpc-XXXXXXXXXXXXXXXXX"
 - `aws_cloudwatch_event_rule` — HIGH/CRITICAL finding filter
 - `aws_cloudwatch_event_target` — SNS target for alerts
 
----
-
-### `modules/security-hub` — Compliance Standards
+**`modules/security-hub` — Compliance Standards**
 
 **Purpose:** Aggregates security findings and enforces compliance against industry benchmarks.
 
@@ -405,9 +395,7 @@ vpc_id                = "vpc-XXXXXXXXXXXXXXXXX"
 - `aws_securityhub_standards_subscription` x2 — CIS + AWS Foundational
 - `aws_securityhub_finding_aggregator` — All-region aggregation
 
----
-
-### `modules/iam-analyser` — Least Privilege Monitoring
+**`modules/iam-analyser` — Least Privilege Monitoring**
 
 **Purpose:** Continuously analyses IAM policies to detect overly permissive access — catches the most common cause of cloud breaches.
 
@@ -421,10 +409,8 @@ vpc_id                = "vpc-XXXXXXXXXXXXXXXXX"
 - `aws_cloudwatch_log_metric_filter` — Root login detection pattern
 - `aws_cloudwatch_metric_alarm` — Alarm on any root login
 
----
-
-### `modules/auto-remediation` — Automated Incident Response
-
+**`modules/auto-remediation` — Automated Incident Response
+**
 **Purpose:** Eliminates human delay from the incident response loop for known HIGH severity threat patterns.
 
 **How It Works:**
@@ -460,9 +446,9 @@ Lambda Function (Python 3.12)
 
 ---
 
-## 📊 Compliance Alignment
+# Compliance Alignment
 
-### CIS AWS Foundations Benchmark v1.2.0
+**CIS AWS Foundations Benchmark v1.2.0**
 
 | Section | Controls | Implemented By |
 |---------|---------|---------------|
@@ -471,7 +457,7 @@ Lambda Function (Python 3.12)
 | 3 — Monitoring | 3.1–3.14 | CloudWatch alarms, EventBridge |
 | 4 — Networking | 4.1–4.4 | VPC, Security Groups, NACL |
 
-### SOC 2 Type II Mapping
+**SOC 2 Type II Mapping**
 
 | Trust Service Criteria | Control | Implementation |
 |----------------------|---------|---------------|
@@ -483,7 +469,7 @@ Lambda Function (Python 3.12)
 | CC7.3 — Incident response | Auto-remediation | EventBridge → Lambda |
 | CC8.1 — Change management | IaC only | Terraform |
 
-### ISO 27001:2013 Mapping
+**ISO 27001:2013 Mapping**
 
 | Annex A Control | Requirement | Implementation |
 |----------------|-------------|---------------|
@@ -495,7 +481,7 @@ Lambda Function (Python 3.12)
 
 ---
 
-## Deployed Infrastructure — Live Resource IDs
+# Deployed Infrastructure — Live Resource IDs
 
 | Resource | AWS Service | Resource ID |
 |----------|------------|------------|
@@ -506,13 +492,11 @@ Lambda Function (Python 3.12)
 | Secure Network | VPC | `vpc-0ceaa75bd8e301568` |
 | Auto-Remediation Function | Lambda | `aws-sentinel-auto-remediation` |
 
----
-# Deployed Infrastructure
 **Deployment Screenshots**
 
 All 25 screenshots are real AWS Console and CLI outputs from the live deployment.
 
-**Terminal Evidence (CLI)**
+**Screenshots — Terminal CLI Evidence**
 
 | # | What It Proves | View |
 |---|---|---|
@@ -549,8 +533,7 @@ All 25 screenshots are real AWS Console and CLI outputs from the live deployment
 | 25 | CloudWatch — sentinel log groups active | [View Screenshot](screenshots/25-cloudwatch-loggroups-console.png) |
 
 ---
-
-## Destroy Infrastructure
+# Destroy Infrastructure
 
 Always destroy after you are done to avoid AWS charges:
 
@@ -576,8 +559,7 @@ aws cloudtrail describe-trails --region us-east-1
 ```
 
 ---
-
-## Enabling GuardDuty and Security Hub
+# Enabling GuardDuty and Security Hub
 
 Both services are fully written in Terraform but conditionally disabled. To activate on a supported AWS account:
 
@@ -597,11 +579,11 @@ aws guardduty create-detector --enable --region us-east-1
 
 ---
 
-## Contributing
+# Contributing
 
 Pull requests are welcome. Please open an issue first for major changes.
 
-### Development Workflow
+**Development Workflow**
 
 ```bash
 # Create feature branch
@@ -619,7 +601,7 @@ git push origin feature/your-feature-name
 
 ---
 
-## License
+# License
 
 MIT License — see [LICENSE](LICENSE) for details.
 
@@ -632,8 +614,3 @@ MIT License — see [LICENSE](LICENSE) for details.
 
  LinkedIn: www.linkedin.com/in/emmanuel-adeoye-29187bb7
 
-
----
-
-*Built to demonstrate enterprise-grade AWS security architecture using Infrastructure as Code.*  
-*Every resource in this repository was deployed to a real AWS account and verified via CLI and AWS Console.*
