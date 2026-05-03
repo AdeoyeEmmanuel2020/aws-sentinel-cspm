@@ -26,12 +26,11 @@
 - [Module Documentation](#module-documentation)
 - [Compliance Alignment](#compliance-alignment)
 - [Deployed Infrastructure](#deployed-infrastructure)
-- [Screenshots — Terminal CLI Evidence](#Screenshots—Terminal-CLI-Evidence)
-- [Screenshots — AWS Console Evidence](#Screenshots—AWS-Console-Evidence)
+- [Terminal CLI Evidence](#Terminal-CLI-Evidence)
+- [AWS Console Evidence](#AWS-Console-Evidence)
 - [Destroy Infrastructure](#destroy-infrastructure)
 - [Enabling GuardDuty and Security Hub](#enabling-guardduty-and-security-hub)
 - [Contributing](#contributing)
-- [Author](#author)
 - [License](#license)
 ---
 
@@ -39,6 +38,7 @@
 **Security Solutions Architect Perspective**
 
 This project was designed, architected, and implemented from the perspective of a **Cloud Security Solutions Architect** — not simply a cloud engineer running tutorials. Every decision made in this codebase reflects real-world enterprise security thinking: threat modelling, defence-in-depth, compliance alignment, least-privilege enforcement, and automated incident response.
+
 
  **The Problem This Solves**
 
@@ -496,7 +496,7 @@ Lambda Function (Python 3.12)
 
 All 25 screenshots are real AWS Console and CLI outputs from the live deployment.
 
-**Screenshots — Terminal CLI Evidence**
+**Terminal CLI Evidence**
 
 | # | What It Proves | View |
 |---|---|---|
@@ -601,16 +601,16 @@ git push origin feature/your-feature-name
 
 ---
 
-# License
-
-MIT License — see [LICENSE](LICENSE) for details.
-
----
-
 # **👤** Author
 **Adeoye Emmanuel** - AWS Certified Solutions Architect | AWS Security Solutions Architect | DevSecOps Engineer
 
 **Email:** Emmanuelofgrace@gmail.com
 
  LinkedIn: www.linkedin.com/in/emmanuel-adeoye-29187bb7
+
+ ---
+
+# License
+
+MIT License — see [LICENSE](LICENSE) for details.
 
