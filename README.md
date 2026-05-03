@@ -65,7 +65,8 @@ AWS Sentinel addresses all three gaps in a single, Terraform-provisioned, produc
 
 # Architecture
 
-<img width="700" height="400" alt="2-lambda-trigger-console" src="https://github.com/user-attachments/assets/d81011f7-dfb1-42aa-bba0-6e001b4fbb87" />
+<img width="700" height="400" alt="gemini-3 1-flash-image-preview (nano-banana-2)  web-search _a_make_the_background_" src="https://github.com/user-attachments/assets/ea73bc1d-3783-4317-96b8-b016adda10e1" />
+
 
 ----
 
