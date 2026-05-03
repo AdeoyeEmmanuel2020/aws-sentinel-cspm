@@ -26,8 +26,7 @@
 - [Module Documentation](#module-documentation)
 - [Compliance Alignment](#compliance-alignment)
 - [Deployed Infrastructure](#deployed-infrastructure)
-- [Command Line Evidence Report](#Command-Line-Evidence-Report)
-- [AWS Console Evidence](#AWS-Console-Evidence)
+- [Deployment Screenshots](#Deployment-Screenshots)
 - [Destroy Infrastructure](#destroy-infrastructure)
 - [Enabling GuardDuty and Security Hub](#enabling-guardduty-and-security-hub)
 - [Contributing](#contributing)
@@ -493,11 +492,13 @@ Lambda Function (Python 3.12)
 | Secure Network | VPC | `vpc-0ceaa75bd8e301568` |
 | Auto-Remediation Function | Lambda | `aws-sentinel-auto-remediation` |
 
-**Deployment Screenshots**
+-------
+
+# Deployment Screenshots
 
 All 25 screenshots are real AWS Console and CLI outputs from the live deployment.
 
-**Command Line Evidence Report**
+**Terminal Evidence (CLI)**
 
 | # | What It Proves | View |
 |---|---|---|
