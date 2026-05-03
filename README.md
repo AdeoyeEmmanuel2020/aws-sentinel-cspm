@@ -507,63 +507,12 @@ Lambda Function (Python 3.12)
 | Auto-Remediation Function | Lambda | `aws-sentinel-auto-remediation` |
 
 ---
-
-## Deployment Screenshots
-
-All 25 screenshots below are real AWS Console and CLI outputs from the live deployment.
-
-## Deployment Screenshots
-
-All 25 screenshots below are real AWS Console and CLI outputs from the live deployment.
-
-### Terminal Evidence (CLI)
-
-| # | What It Proves | File |
-|---|---|---|
-| 01 | All Terraform resource IDs confirmed | `screenshots/01-terraform-output.png` |
-| 02 | Lambda function live — Python 3.12, Active state | `screenshots/02-lambda-function-cli.png` |
-| 03 | IAM Analyzer active — account scope | `screenshots/03-iam-analyzer-cli.png` |
-| 04 | CloudTrail actively logging — IsLogging: true | `screenshots/04-cloudtrail-status-cli.png` |
-| 05 | KMS key rotation enabled — KeyRotationEnabled: true | `screenshots/05-kms-rotation-cli.png` |
-| 06 | S3 SSE-KMS encryption confirmed | `screenshots/06-s3-encryption-cli.png` |
-| 07 | VPC Flow Logs active — ALL traffic type | `screenshots/07-vpc-flowlogs-cli.png` |
-| 08 | Private subnets — MapPublicIpOnLaunch: false | `screenshots/08-private-subnets-cli.png` |
-| 09 | Full Terraform module structure | `screenshots/09-project-structure-cli.png` |
-
-### AWS Console Evidence
-
-| # | What It Proves | File |
-|---|---|---|
-| 10 | CloudTrail — multi-region, KMS encrypted, log validation ON | `screenshots/10-cloudtrail-console.png` |
-| 11 | KMS — CMK enabled, rotation enabled | `screenshots/11-kms-key-console.png` |
-| 12 | S3 — SSE-KMS + versioning enabled | `screenshots/12-s3-properties-console.png` |
-| 13 | S3 — all 4 public access blocks ON | `screenshots/13-s3-permissions-console.png` |
-| 14 | VPC — 10.0.0.0/16, DNS enabled | `screenshots/14-vpc-overview-console.png` |
-| 15 | Subnets — private only, no public IP assignment | `screenshots/15-private-subnets-console.png` |
-| 16 | Security Group — zero inbound rules, HTTPS-only outbound | `screenshots/16-security-group-console.png` |
-| 17 | NACL — HTTPS-only inbound and outbound rules | `screenshots/17-nacl-console.png` |
-| 18 | VPC Flow Logs — ALL traffic, active status | `screenshots/18-vpc-flowlogs-console.png` |
-| 19 | IAM Analyzer — Active, account scope | `screenshots/19-iam-analyzer-console.png` |
-| 20 | Lambda — function deployed, Python 3.12 | `screenshots/20-lambda-console.png` |
-| 21 | Lambda — EventBridge trigger attached | `screenshots/21-lambda-trigger-console.png` |
-| 22 | EventBridge — both sentinel rules active | `screenshots/22-eventbridge-rules-console.png` |
-| 23 | SNS — guardduty-alerts topic created | `screenshots/23-sns-topic-console.png` |
-| 24 | SNS — email subscription confirmed | `screenshots/24-sns-subscription-console.png` |
-| 25 | CloudWatch — sentinel log groups active | `screenshots/25-cloudwatch-loggroups-console.png` |
-
-## 📸 Deployment Screenshots
+# Deployed Infrastructure
+**Deployment Screenshots**
 
 All 25 screenshots are real AWS Console and CLI outputs from the live deployment.
 
-
-
-## 📸 Deployment Screenshots
-
-All 25 screenshots are real AWS Console and CLI outputs from the live deployment.
-
----
-
-### 🖥️ Terminal Evidence (CLI)
+**Terminal Evidence (CLI)**
 
 | # | What It Proves | View |
 |---|---|---|
@@ -577,9 +526,8 @@ All 25 screenshots are real AWS Console and CLI outputs from the live deployment
 | 08 | Private subnets — MapPublicIpOnLaunch: false | [View Screenshot](screenshots/08-private-subnets-cli.png) |
 | 09 | Full Terraform module structure | [View Screenshot](screenshots/09-project-structure-cli.png) |
 
----
 
-### 🖥️ AWS Console Evidence
+**AWS Console Evidence**
 
 | # | What It Proves | View |
 |---|---|---|
