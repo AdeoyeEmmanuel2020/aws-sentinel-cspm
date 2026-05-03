@@ -1,0 +1,21 @@
+# Terraform
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+*.tfvars
+!terraform.tfvars.example
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# AWS credentials
+.aws/
+*.pem
+*.key
+
+# OS
+.DS_Store
+Thumbs.db
