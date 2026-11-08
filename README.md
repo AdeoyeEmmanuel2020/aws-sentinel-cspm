@@ -25,7 +25,7 @@
 - [Quick Start](#quick-start)
 - [Module Documentation](#module-documentation)
 - [Compliance Alignment](#compliance-alignment)
-- [Deployment Screenshots](#Deployment-Screenshots)
+- [Reproducible Deployment Evidence](#reproducible-deployment-evidence)
 - [Destroy Infrastructure](#destroy-infrastructure)
 - [Enabling GuardDuty and Security Hub](#enabling-guardduty-and-security-hub)
 - [Contributing](#contributing)
@@ -182,32 +182,15 @@ aws-sentinel-cspm/
 ├── docs/
 │   └── architecture.md                 # Extended architecture documentation
 │
-└── screenshots/                     # Deployment evidence (25 screenshots)
-    ├── 01-terraform-output.png
-    ├── 02-lambda-function-cli.png
-    ├── 03-iam-analyzer-cli.png
-    ├── 04-cloudtrail-status-cli.png
-    ├── 05-kms-rotation-cli.png
-    ├── 06-s3-encryption-cli.png
-    ├── 07-vpc-flowlogs-cli.png
-    ├── 08-private-subnets-cli.png
-    ├── 09-project-structure-cli.png
-    ├── 10-cloudtrail-console.png
-    ├── 11-kms-key-console.png
-    ├── 12-s3-properties-console.png
-    ├── 13-s3-permissions-console.png
-    ├── 14-vpc-overview-console.png
-    ├── 15-private-subnets-console.png
-    ├── 16-security-group-console.png
-    ├── 17-nacl-console.png
-    ├── 18-vpc-flowlogs-console.png
-    ├── 19-iam-analyzer-console.png
-    ├── 20-lambda-console.png
-    ├── 21-lambda-trigger-console.png
-    ├── 22-eventbridge-rules-console.png
-    ├── 23-sns-topic-console.png
-    ├── 24-sns-subscription-console.png
-    └── 25-cloudwatch-loggroups-console.png
+├── docs/
+│   ├── architecture.md
+│   ├── aws-sentinel-architecture.svg
+│   ├── evidence-collection.md       # Evidence protocol and redaction rules
+│   ├── research-methodology.md
+│   └── threat-model.md
+│
+└── tests/
+    └── test_remediation.py           # Deterministic response-decision tests
 ```
 
 ---
@@ -493,45 +476,19 @@ Lambda Function (Python 3.12)
 
 ---
 
-# Deployment Screenshots
+# Reproducible Deployment Evidence
 
-All 25 screenshots are real AWS Console and CLI outputs from the live deployment.
+Screenshots are not treated as primary research evidence. The previous gallery was
+removed because it exposed account metadata, contained broken and mislabelled
+links, showed an unconfirmed email subscription, and predated the current response
+implementation. Retaining it would make the repository's evidence misleading.
 
-**Terminal Evidence (CLI)**
+Fresh evidence must be collected from the exact Git commit being evaluated and
+must include machine-readable AWS CLI output, deployment metadata, UTC timestamps,
+and redacted supporting screenshots. Follow the
+[evidence collection protocol](docs/evidence-collection.md).
 
-| # | What It Proves | View |
-|---|---|---|
-| 01 | All Terraform resource IDs confirmed | [View Screenshot](screenshots/01-terraform-output.png) |
-| 02 | Lambda function live — Python 3.12, Active state | [View Screenshot](screenshots/02-lambda-function-cli.png) |
-| 03 | IAM Analyzer active — account scope | [View Screenshot](screenshots/03-iam-analyzer-cli.png) |
-| 04 | CloudTrail actively logging — IsLogging: true | [View Screenshot](screenshots/04-cloudtrail-status-cli.png) |
-| 05 | KMS key rotation enabled — KeyRotationEnabled: true | [View Screenshot](screenshots/05-kms-rotation-cli.png) |
-| 06 | S3 SSE-KMS encryption confirmed | [View Screenshot](screenshots/06-s3-encryption-cli.png) |
-| 07 | VPC Flow Logs active — ALL traffic type | [View Screenshot](screenshots/07-vpc-flowlogs-cli.png) |
-| 08 | Private subnets — MapPublicIpOnLaunch: false | [View Screenshot](screenshots/08-private-subnets-cli.png) |
-| 09 | Full Terraform module structure | [View Screenshot](screenshots/09-project-structure-cli.png) |
-
-
-**AWS Console Evidence**
-
-| # | What It Proves | View |
-|---|---|---|
-| 10 | CloudTrail — multi-region, KMS encrypted, log validation ON | [View Screenshot](screenshots/10-cloudtrail-console.png) |
-| 11 | KMS — CMK enabled, rotation enabled | [View Screenshot](screenshots/11-kms-key-console.png) |
-| 12 | S3 — SSE-KMS + versioning enabled | [View Screenshot](screenshots/12-s3-properties-console.png) |
-| 13 | S3 — all 4 public access blocks ON | [View Screenshot](screenshots/13-s3-permissions-console.png) |
-| 14 | VPC — 10.0.0.0/16, DNS enabled | [View Screenshot](screenshots/14-vpc-overview-console.png) |
-| 15 | Subnets — private only, no public IP assignment | [View Screenshot](screenshots/15-private-subnets-console.png) |
-| 16 | Security Group — zero inbound rules, HTTPS-only outbound | [View Screenshot](screenshots/16-security-group-console.png) |
-| 17 | NACL — HTTPS-only inbound and outbound rules | [View Screenshot](screenshots/17-nacl-console.png) |
-| 18 | VPC Flow Logs — ALL traffic, active status | [View Screenshot](screenshots/18-vpc-flowlogs-console.png) |
-| 19 | IAM Analyzer — Active, account scope | [View Screenshot](screenshots/19-iam-analyzer-console.png) |
-| 20 | Lambda — function deployed, Python 3.12 | [View Screenshot](screenshots/20-lambda-console.png) |
-| 21 | Lambda — EventBridge trigger attached | [View Screenshot](screenshots/21-lambda-trigger-console.png) |
-| 22 | EventBridge — both sentinel rules active | [View Screenshot](screenshots/22-eventbridge-rules-console.png) |
-| 23 | SNS — guardduty-alerts topic created | [View Screenshot](screenshots/23-sns-topic-console.png) |
-| 24 | SNS — email subscription confirmed | [View Screenshot](screenshots/24-sns-subscription-console.png) |
-| 25 | CloudWatch — sentinel log groups active | [View Screenshot](screenshots/25-cloudwatch-loggroups-console.png) |
+No current live-deployment claim is made until that protocol has been completed.
 
 ---
 # Destroy Infrastructure
