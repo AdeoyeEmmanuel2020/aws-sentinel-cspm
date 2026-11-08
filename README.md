@@ -68,7 +68,13 @@ and [evaluation protocol](docs/research-methodology.md) for scope and limitation
 
 # Architecture
 
-<img width="700" height="400" alt="gemini-3 1-flash-image-preview (nano-banana-2)  web-search _a_make_the_background_" src="https://github.com/user-attachments/assets/ea73bc1d-3783-4317-96b8-b016adda10e1" />
+![AWS Sentinel research prototype architecture](docs/aws-sentinel-architecture.svg)
+
+The diagram is deliberately limited to resources implemented in this repository.
+Solid grey arrows show telemetry or dependencies, orange arrows show the
+GuardDuty response path, and dashed arrows show provisioning or encryption
+dependencies. See the [threat model](docs/threat-model.md) for trust boundaries
+and residual risks.
 
 
 ----

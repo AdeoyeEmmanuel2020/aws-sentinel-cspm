@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">AWS Sentinel research prototype architecture</title>
+  <desc id="desc">Terraform provisions preventive, evidence, detection, governance, alerting, and audit-by-default response controls in one AWS account.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#43546a"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#c45500"/>
+    </marker>
+    <style>
+      .title { font: 700 34px Inter, Arial, sans-serif; fill: #162235; }
+      .subtitle { font: 400 17px Inter, Arial, sans-serif; fill: #52647a; }
+      .zone-title { font: 700 19px Inter, Arial, sans-serif; fill: #26374d; letter-spacing: .4px; }
+      .box-title { font: 700 18px Inter, Arial, sans-serif; fill: #162235; }
+      .box-copy { font: 400 14px Inter, Arial, sans-serif; fill: #43546a; }
+      .small { font: 600 13px Inter, Arial, sans-serif; fill: #52647a; }
+      .flow { fill: none; stroke: #43546a; stroke-width: 2.5; marker-end: url(#arrow); }
+      .event-flow { fill: none; stroke: #c45500; stroke-width: 3; marker-end: url(#arrow-orange); }
+      .dash { stroke-dasharray: 8 7; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#f7f9fc"/>
+  <text x="80" y="65" class="title">AWS Sentinel — CSPM Research Prototype</text>
+  <text x="80" y="96" class="subtitle">Implemented Terraform architecture · single AWS account · audit-by-default automated response</text>
+
+  <!-- Provisioning boundary -->
+  <rect x="80" y="130" width="1440" height="105" rx="14" fill="#eef2ff" stroke="#6d5bd0" stroke-width="2"/>
+  <text x="110" y="165" class="zone-title">PROVISIONING AND CHANGE CONTROL</text>
+  <rect x="110" y="182" width="245" height="38" rx="8" fill="#ffffff" stroke="#6d5bd0"/>
+  <text x="232" y="207" text-anchor="middle" class="box-title">Terraform</text>
+  <text x="390" y="205" class="box-copy">Versioned modules provision every control shown below; CI checks formatting, validation, and response-decision tests.</text>
+  <path d="M 232 220 L 232 265" class="flow dash"/>
+
+  <!-- AWS account boundary -->
+  <rect x="80" y="265" width="1440" height="650" rx="18" fill="#ffffff" stroke="#8091a7" stroke-width="2"/>
+  <text x="110" y="300" class="zone-title">AWS ACCOUNT BOUNDARY</text>
+
+  <!-- Preventive plane -->
+  <rect x="110" y="325" width="400" height="535" rx="14" fill="#edf8f1" stroke="#2f855a" stroke-width="2"/>
+  <text x="135" y="360" class="zone-title">PREVENTIVE CONTROL PLANE</text>
+
+  <rect x="140" y="390" width="340" height="105" rx="12" fill="#ffffff" stroke="#79b692"/>
+  <text x="165" y="425" class="box-title">VPC and private subnets</text>
+  <text x="165" y="452" class="box-copy">Two private subnets across AZs</text>
+  <text x="165" y="475" class="box-copy">DNS support; no public subnets created</text>
+
+  <rect x="140" y="520" width="340" height="105" rx="12" fill="#ffffff" stroke="#79b692"/>
+  <text x="165" y="555" class="box-title">Network controls</text>
+  <text x="165" y="582" class="box-copy">Default-deny ingress security group</text>
+  <text x="165" y="605" class="box-copy">HTTPS-only egress and subnet NACL</text>
+
+  <rect x="140" y="650" width="340" height="105" rx="12" fill="#ffffff" stroke="#79b692"/>
+  <text x="165" y="685" class="box-title">KMS customer-managed key</text>
+  <text x="165" y="712" class="box-copy">Annual rotation; CloudTrail key policy</text>
+  <text x="165" y="735" class="box-copy">Encrypts the central evidence bucket</text>
+
+  <rect x="140" y="780" width="340" height="55" rx="12" fill="#ffffff" stroke="#79b692"/>
+  <text x="310" y="814" text-anchor="middle" class="box-title">S3 public-access block + TLS policy</text>
+
+  <!-- Evidence and detection plane -->
+  <rect x="540" y="325" width="455" height="535" rx="14" fill="#eef6ff" stroke="#3976a8" stroke-width="2"/>
+  <text x="565" y="360" class="zone-title">EVIDENCE AND DETECTION PLANE</text>
+
+  <rect x="570" y="390" width="180" height="105" rx="12" fill="#ffffff" stroke="#78a9cf"/>
+  <text x="660" y="425" text-anchor="middle" class="box-title">CloudTrail</text>
+  <text x="660" y="452" text-anchor="middle" class="box-copy">Multi-region API audit</text>
+  <text x="660" y="475" text-anchor="middle" class="box-copy">Log-file validation</text>
+
+  <rect x="785" y="390" width="180" height="105" rx="12" fill="#ffffff" stroke="#78a9cf"/>
+  <text x="875" y="425" text-anchor="middle" class="box-title">VPC Flow Logs</text>
+  <text x="875" y="452" text-anchor="middle" class="box-copy">ALL traffic</text>
+  <text x="875" y="475" text-anchor="middle" class="box-copy">90-day log groups</text>
+
+  <rect x="570" y="540" width="395" height="110" rx="12" fill="#ffffff" stroke="#78a9cf"/>
+  <text x="767" y="575" text-anchor="middle" class="box-title">Central evidence storage</text>
+  <text x="767" y="602" text-anchor="middle" class="box-copy">S3 versioning · SSE-KMS · lifecycle transition</text>
+  <text x="767" y="625" text-anchor="middle" class="box-copy">CloudWatch Logs supports metric filters and analysis</text>
+
+  <path d="M 660 495 L 660 540" class="flow"/>
+  <path d="M 875 495 L 875 540" class="flow"/>
+  <path d="M 510 702 L 570 595" class="flow dash"/>
+  <text x="520" y="668" class="small">encryption</text>
+
+  <rect x="570" y="695" width="180" height="110" rx="12" fill="#ffffff" stroke="#78a9cf"/>
+  <text x="660" y="730" text-anchor="middle" class="box-title">GuardDuty</text>
+  <text x="660" y="757" text-anchor="middle" class="box-copy">Threat findings</text>
+  <text x="660" y="780" text-anchor="middle" class="box-copy">Optional enablement</text>
+
+  <rect x="785" y="695" width="180" height="110" rx="12" fill="#ffffff" stroke="#78a9cf"/>
+  <text x="875" y="730" text-anchor="middle" class="box-title">Security Hub</text>
+  <text x="875" y="757" text-anchor="middle" class="box-copy">CIS + AWS FSBP</text>
+  <text x="875" y="780" text-anchor="middle" class="box-copy">Optional enablement</text>
+
+  <!-- Governance and response plane -->
+  <rect x="1025" y="325" width="465" height="535" rx="14" fill="#fff5eb" stroke="#c45500" stroke-width="2"/>
+  <text x="1050" y="360" class="zone-title">GOVERNANCE AND RESPONSE PLANE</text>
+
+  <rect x="1055" y="390" width="405" height="85" rx="12" fill="#ffffff" stroke="#dc9a68"/>
+  <text x="1080" y="425" class="box-title">IAM Access Analyzer + root-use alarm</text>
+  <text x="1080" y="452" class="box-copy">Account-level external-access analysis and CloudTrail metric filter</text>
+
+  <rect x="1055" y="520" width="185" height="95" rx="12" fill="#ffffff" stroke="#dc9a68"/>
+  <text x="1147" y="556" text-anchor="middle" class="box-title">EventBridge</text>
+  <text x="1147" y="583" text-anchor="middle" class="box-copy">Severity ≥ 7 routing</text>
+
+  <rect x="1275" y="520" width="185" height="95" rx="12" fill="#ffffff" stroke="#dc9a68"/>
+  <text x="1367" y="556" text-anchor="middle" class="box-title">SNS</text>
+  <text x="1367" y="583" text-anchor="middle" class="box-copy">Email notification</text>
+
+  <rect x="1055" y="670" width="405" height="135" rx="12" fill="#ffffff" stroke="#dc9a68"/>
+  <text x="1257" y="707" text-anchor="middle" class="box-title">Lambda response decision</text>
+  <text x="1257" y="735" text-anchor="middle" class="box-copy">Default: AUDIT — record “would stop instance”</text>
+  <text x="1257" y="760" text-anchor="middle" class="box-copy">Opt-in: ENFORCE — stop tagged EC2 instance</text>
+  <text x="1257" y="785" text-anchor="middle" class="small">Requires AllowAutomatedResponse=true</text>
+
+  <path d="M 660 805 L 660 835 L 1010 835 L 1010 568 L 1055 568" class="event-flow"/>
+  <text x="780" y="827" class="small">GuardDuty finding event</text>
+  <path d="M 1240 568 L 1275 568" class="event-flow"/>
+  <path d="M 1147 615 L 1147 670" class="event-flow"/>
+
+  <!-- Legend -->
+  <rect x="80" y="940" width="1440" height="42" rx="10" fill="#edf1f6"/>
+  <line x1="110" y1="961" x2="165" y2="961" class="flow"/>
+  <text x="180" y="967" class="small">telemetry / dependency</text>
+  <line x1="390" y1="961" x2="445" y2="961" class="event-flow"/>
+  <text x="460" y="967" class="small">security finding / response path</text>
+  <text x="820" y="967" class="small">Dashed line: provisioning or encryption dependency</text>
+  <text x="1485" y="967" text-anchor="end" class="small">Scope: resources implemented in this repository</text>
+</svg>
