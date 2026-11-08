@@ -1,0 +1,12 @@
+aws_region          = "us-east-1"
+environment         = "research"
+owner               = "security-research"
+project_name        = "aws-sentinel"
+vpc_cidr            = "10.0.0.0/16"
+alert_email         = "security-team@example.org"
+enable_guardduty    = false
+enable_security_hub = false
+
+# Audit is the safe default. Enforce can stop an EC2 instance referenced by a
+# GuardDuty finding with severity >= 7; approve and exercise it in a sandbox first.
+response_mode = "audit"

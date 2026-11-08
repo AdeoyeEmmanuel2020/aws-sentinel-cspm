@@ -94,7 +94,7 @@ resource "aws_s3_bucket_policy" "logs" {
         Effect    = "Deny"
         Principal = "*"
         Action    = "s3:*"
-        Resource  = [
+        Resource = [
           aws_s3_bucket.logs.arn,
           "${aws_s3_bucket.logs.arn}/*"
         ]
@@ -103,21 +103,21 @@ resource "aws_s3_bucket_policy" "logs" {
         }
       },
       {
-        Sid    = "AllowCloudTrailWrite"
-        Effect = "Allow"
+        Sid       = "AllowCloudTrailWrite"
+        Effect    = "Allow"
         Principal = { Service = "cloudtrail.amazonaws.com" }
-        Action   = "s3:PutObject"
-        Resource = "${aws_s3_bucket.logs.arn}/cloudtrail/AWSLogs/*"
+        Action    = "s3:PutObject"
+        Resource  = "${aws_s3_bucket.logs.arn}/cloudtrail/AWSLogs/*"
         Condition = {
           StringEquals = { "s3:x-amz-acl" = "bucket-owner-full-control" }
         }
       },
       {
-        Sid    = "AllowCloudTrailACLCheck"
-        Effect = "Allow"
+        Sid       = "AllowCloudTrailACLCheck"
+        Effect    = "Allow"
         Principal = { Service = "cloudtrail.amazonaws.com" }
-        Action   = "s3:GetBucketAcl"
-        Resource = aws_s3_bucket.logs.arn
+        Action    = "s3:GetBucketAcl"
+        Resource  = aws_s3_bucket.logs.arn
       }
     ]
   })

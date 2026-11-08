@@ -44,3 +44,14 @@ variable "enable_security_hub" {
   type        = bool
   default     = false
 }
+
+variable "response_mode" {
+  description = "GuardDuty response behavior. Keep audit for evaluation; use enforce only after operational approval."
+  type        = string
+  default     = "audit"
+
+  validation {
+    condition     = contains(["audit", "enforce"], var.response_mode)
+    error_message = "response_mode must be either audit or enforce."
+  }
+}

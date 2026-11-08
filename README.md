@@ -7,10 +7,10 @@
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Security](https://img.shields.io/badge/Security-Zero--Trust-DC143C?style=for-the-badge&logo=shield&logoColor=white)
 ![Compliance](https://img.shields.io/badge/Compliance-CIS%20%7C%20SOC2%20%7C%20ISO27001-28A745?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Production%20Ready-00C851?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Research%20Prototype-blue?style=for-the-badge)
 
-**An enterprise-grade, fully automated Cloud Security Posture Management platform built on AWS**  
-**Provisioned entirely with Terraform | Zero-Trust Architecture | Auto-Remediation | 100% Encryption Compliance**
+**A reproducible AWS cloud-security research prototype built with Terraform**
+**Preventive controls | Auditable detection | Safe-by-default response experimentation**
 </div>
 
 ----
@@ -46,7 +46,10 @@ Organisations migrating to AWS frequently face three critical security gaps:
 2. **Manual response** — Security teams react to threats manually, resulting in Mean Time to Respond (MTTR) measured in hours
 3. **Compliance drift** — Infrastructure changes over time break compliance baselines with no automated detection
 
-AWS Sentinel addresses all three gaps in a single, Terraform-provisioned, production-ready platform.
+AWS Sentinel studies these gaps through a Terraform-provisioned reference
+architecture. It is a research prototype, not a certification, a complete CSPM
+product, or a production-readiness claim. See the [threat model](docs/threat-model.md)
+and [evaluation protocol](docs/research-methodology.md) for scope and limitations.
 
 **My Role on This Project**
 
@@ -57,7 +60,7 @@ AWS Sentinel addresses all three gaps in a single, Terraform-provisioned, produc
 | **Zero-Trust Network Design** | Architected VPC with private-only subnets, NACL rules, and deny-all Security Groups |
 | **Encryption Strategy** | Designed end-to-end encryption using Customer Managed KMS keys with rotation |
 | **Compliance Mapping** | Mapped all controls to CIS Benchmark, SOC 2, and ISO 27001 frameworks |
-| **Auto-Remediation** | Built EventBridge → Lambda pipeline reducing MTTR from hours to under 5 minutes |
+| **Response experimentation** | Built an audit-by-default EventBridge → Lambda pipeline with opt-in EC2 containment |
 | **Centralised Logging** | Architected CloudTrail + VPC Flow Logs → CloudWatch centralised log aggregation |
 | **IAM Governance** | Implemented IAM Access Analyzer for continuous least-privilege enforcement |
 
@@ -72,16 +75,19 @@ AWS Sentinel addresses all three gaps in a single, Terraform-provisioned, produc
 
 # Architecture Decisions & Rationale
 
-**Why private-only subnets?**  
+**Why private-only subnets?**
 Zero-trust network design assumes breach. By eliminating public subnets entirely, we remove the possibility of direct internet exposure of any workload. All traffic must traverse the security boundary.
 
-**Why Customer Managed KMS keys instead of AWS managed keys?**  
+**Why Customer Managed KMS keys instead of AWS managed keys?**
 CMKs give the security team full control of the key policy — we can restrict which services and principals can use the key for decryption. AWS managed keys do not support this level of granular access control.
 
-**Why EventBridge → Lambda instead of manual remediation?**  
-Security incidents follow predictable patterns. For known HIGH and CRITICAL severity GuardDuty finding types (e.g. CryptoCurrency:EC2/BitcoinTool, UnauthorizedAccess:EC2/SSHBruteForce), automated remediation reduces MTTR from hours to under 5 minutes — before an attacker can pivot laterally.
+**Why EventBridge → Lambda instead of manual remediation?**
+Known HIGH and CRITICAL GuardDuty finding types can support automated response,
+but latency and safety must be measured rather than assumed. This repository
+defaults to a non-mutating audit decision; `enforce` mode is reserved for approved
+sandbox experiments.
 
-**Why VPC Flow Logs on ALL traffic types?**  
+**Why VPC Flow Logs on ALL traffic types?**
 Capturing only REJECT traffic misses accepted-but-suspicious lateral movement. Logging ALL traffic enables forensic reconstruction of any incident timeline.
 
 ---
@@ -101,12 +107,12 @@ Capturing only REJECT traffic misses accepted-but-suspicious lateral movement. L
 | **Detection** | Real-time threat detection | Amazon GuardDuty | SOC 2 CC7.1 |
 | **Detection** | Security standards compliance | AWS Security Hub | CIS Benchmark |
 | **Detection** | API activity monitoring | CloudTrail (multi-region) | SOC 2 CC7.2, ISO 27001 A.12.4 |
-| **Response** | Automated incident response | EventBridge + Lambda | SOC 2 CC7.3 |
+| **Response** | Auditable decision; opt-in EC2 containment | EventBridge + Lambda | Related to SOC 2 CC7.3; not certification evidence |
 | **Response** | Security team alerting | SNS Email Notifications | SOC 2 CC7.3 |
 | **Data** | Encryption at rest | KMS CMK (SSE-KMS) | ISO 27001 A.10.1 |
 | **Data** | Encryption in transit | S3 HTTPS-only bucket policy | PCI-DSS 4.1 |
 | **Data** | Key lifecycle management | KMS Annual Rotation | ISO 27001 A.10.1 |
-| **Audit** | Immutable log storage | S3 + Versioning + Lifecycle | SOC 2 CC7.2 |
+| **Audit** | Versioned log storage with validation | S3 + Versioning + Lifecycle | Related to SOC 2 CC7.2; same-account admins remain a threat |
 
 ---
 
@@ -213,9 +219,9 @@ aws-sentinel-cspm/
 **Required IAM Permissions**
 The AWS user or role running Terraform must have permissions for:
 ```
-cloudtrail:*, guardduty:*, securityhub:*, 
-accessanalyzer:*, kms:*, s3:*, ec2:*, 
-lambda:*, iam:*, events:*, sns:*, 
+cloudtrail:*, guardduty:*, securityhub:*,
+accessanalyzer:*, kms:*, s3:*, ec2:*,
+lambda:*, iam:*, events:*, sns:*,
 logs:*, cloudwatch:*
 ```
 

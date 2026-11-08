@@ -24,57 +24,20 @@ resource "aws_iam_role_policy" "remediation_policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Effect = "Allow"
-        Action = [
-          "ec2:StopInstances",
-          "ec2:DescribeInstances",
-          "iam:CreatePolicy",
-          "iam:AttachRolePolicy",
-          "sns:Publish",
-          "logs:CreateLogGroup",
-          "logs:CreateLogStream",
-          "logs:PutLogEvents"
-        ]
-        Resource = "*"
+        Effect   = "Allow"
+        Action   = "ec2:StopInstances"
+        Resource = "arn:aws:ec2:*:*:instance/*"
+        Condition = {
+          StringEquals = {
+            "ec2:ResourceTag/AllowAutomatedResponse" = "true"
+          }
+        }
       }
     ]
   })
 }
 
-resource "local_file" "lambda_code" {
-  filename = "${path.module}/lambda/index.py"
-  content  = <<-PYTHON
-import json
-import logging
-
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
-def handler(event, context):
-    logger.info(f"Received event: {json.dumps(event)}")
-    detail       = event.get("detail", {})
-    finding_type = detail.get("type", "")
-    severity     = detail.get("severity", 0)
-    logger.info(f"Finding: {finding_type} | Severity: {severity}")
-    if severity >= 7:
-        logger.info("HIGH severity - initiating auto-remediation")
-        return {
-            "statusCode": 200,
-            "body": json.dumps({
-                "message": "Auto-remediation triggered",
-                "finding_type": finding_type,
-                "severity": severity
-            })
-        }
-    return {
-        "statusCode": 200,
-        "body": json.dumps({"message": "Below remediation threshold - logged only"})
-    }
-  PYTHON
-}
-
 data "archive_file" "lambda_zip" {
-  depends_on  = [local_file.lambda_code]
   type        = "zip"
   source_file = "${path.module}/lambda/index.py"
   output_path = "${path.module}/lambda/remediation.zip"
@@ -92,8 +55,9 @@ resource "aws_lambda_function" "auto_remediation" {
   # No KMS key — uses default AWS managed encryption
   environment {
     variables = {
-      PROJECT_NAME = var.project_name
-      ENVIRONMENT  = var.environment
+      PROJECT_NAME  = var.project_name
+      ENVIRONMENT   = var.environment
+      RESPONSE_MODE = var.response_mode
     }
   }
 

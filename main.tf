@@ -49,9 +49,8 @@ module "iam_analyser" {
 }
 
 module "auto_remediation" {
-  source            = "./modules/auto-remediation"
-  project_name      = var.project_name
-  environment       = var.environment
-  alert_email       = var.alert_email
-  guardduty_enabled = var.enable_guardduty
+  source        = "./modules/auto-remediation"
+  project_name  = var.project_name
+  environment   = var.environment
+  response_mode = var.response_mode
 }

@@ -1,1 +1,1 @@
-output "security_hub_enabled" { value = true }
+output "security_hub_enabled" { value = var.enable_security_hub }
