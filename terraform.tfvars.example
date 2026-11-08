@@ -3,7 +3,7 @@ environment         = "research"
 owner               = "security-research"
 project_name        = "aws-sentinel"
 vpc_cidr            = "10.0.0.0/16"
-alert_email         = "security-team@example.org"
+alert_email         = "" # Optional; use a monitored address for notification testing.
 enable_guardduty    = false
 enable_security_hub = false
 

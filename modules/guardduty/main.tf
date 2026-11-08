@@ -28,6 +28,7 @@ resource "aws_sns_topic" "guardduty_alerts" {
 }
 
 resource "aws_sns_topic_subscription" "email_alert" {
+  count     = var.alert_email == "" ? 0 : 1
   topic_arn = aws_sns_topic.guardduty_alerts.arn
   protocol  = "email"
   endpoint  = var.alert_email

@@ -29,8 +29,14 @@ variable "vpc_cidr" {
 }
 
 variable "alert_email" {
-  description = "Email address for security alerts"
+  description = "Optional email address for security alerts. Empty disables the email subscription."
   type        = string
+  default     = ""
+
+  validation {
+    condition     = var.alert_email == "" || can(regex("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$", var.alert_email))
+    error_message = "alert_email must be empty or a syntactically valid email address."
+  }
 }
 
 variable "enable_guardduty" {

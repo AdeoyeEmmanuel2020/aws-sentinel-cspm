@@ -50,7 +50,7 @@ resource "aws_cloudtrail" "sentinel" {
 
     data_resource {
       type   = "AWS::S3::Object"
-      values = ["arn:aws:s3:::"]
+      values = ["${var.s3_bucket_arn}/"]
     }
   }
 
