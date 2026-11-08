@@ -1,0 +1,50 @@
+{
+  "access_analyzer": {
+    "name": "aws-sentinel-access-analyzer",
+    "status": "ACTIVE",
+    "type": "ACCOUNT"
+  },
+  "cloudtrail": {
+    "cloudwatch_delivery_observed": true,
+    "global_service_events": true,
+    "kms_encryption_configured": true,
+    "log_file_validation": true,
+    "logging": true,
+    "multi_region": true,
+    "s3_log_and_digest_prefixes_observed": true
+  },
+  "eventbridge": {
+    "high_severity_pattern_match": true,
+    "lambda_target_count": 1,
+    "lambda_target_id": "AutoRemediation",
+    "sns_target_count": 1,
+    "sns_target_id": "SendToSNS"
+  },
+  "lambda": {
+    "function_name": "aws-sentinel-auto-remediation",
+    "last_update_status": "Successful",
+    "response_mode": "audit",
+    "runtime": "python3.12",
+    "state": "Active"
+  },
+  "network": {
+    "flow_log_count": 1,
+    "flow_log_destination": "cloud-watch-logs",
+    "flow_log_status": "ACTIVE",
+    "flow_log_traffic_type": "ALL",
+    "private_subnet_count": 2,
+    "private_subnet_public_ip_on_launch": [false, false],
+    "security_group_egress": "tcp/443 to 0.0.0.0/0",
+    "security_group_egress_rule_count": 1,
+    "security_group_ingress_rule_count": 0
+  },
+  "s3_evidence_bucket": {
+    "block_public_acls": true,
+    "block_public_policy": true,
+    "ignore_public_acls": true,
+    "restrict_public_buckets": true,
+    "server_side_encryption": "aws:kms",
+    "versioning": "Enabled"
+  },
+  "observed_at_utc": "2026-11-08T14:39:39Z"
+}

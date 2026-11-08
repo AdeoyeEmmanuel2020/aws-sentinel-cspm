@@ -1,0 +1,8 @@
+evidence_id,claim,source_file,observed_at_utc,region,commit_sha,redacted
+E01,Environment and tool provenance,environment.json,2026-11-08T14:39:39Z,us-east-1,0e3b5745df5ed15ee9c523a7af0071a9cc18660f,true
+E02,Terraform proposed 42 creates and no destructive changes,terraform-plan-summary.txt,2026-11-08T14:34:00Z,us-east-1,0e3b5745df5ed15ee9c523a7af0071a9cc18660f,true
+E03,Deployment converged with zero drift,terraform-apply-summary.txt,2026-11-08T14:39:39Z,us-east-1,0e3b5745df5ed15ee9c523a7af0071a9cc18660f,true
+E04,Preventive and detective controls were observed live,observations/control-observations.json,2026-11-08T14:39:39Z,us-east-1,0e3b5745df5ed15ee9c523a7af0071a9cc18660f,true
+E05,Audit response decisions were non-destructive,tests/live-audit-tests.json,2026-11-08T14:37:43Z,us-east-1,0e3b5745df5ed15ee9c523a7af0071a9cc18660f,true
+E06,Terraform destroyed all managed resources,destruction/terraform-destroy-summary.txt,2026-11-08T14:41:31Z,us-east-1,0e3b5745df5ed15ee9c523a7af0071a9cc18660f,true
+E07,Direct AWS checks confirmed removal and KMS pending deletion,destruction/post-destroy-verification.json,2026-11-08T14:41:31Z,us-east-1,0e3b5745df5ed15ee9c523a7af0071a9cc18660f,true

@@ -1,0 +1,29 @@
+{
+  "eventbridge_pattern_test": {
+    "expected": true,
+    "result": true,
+    "severity": 8.0
+  },
+  "high_severity_lambda_test": {
+    "action": "would-stop-instance",
+    "finding_id": "research-high-001",
+    "finding_type": "UnauthorizedAccess:EC2/SSHBruteForce",
+    "reason": "audit-mode",
+    "severity": 8.0,
+    "status_code": 200
+  },
+  "low_severity_lambda_test": {
+    "action": "none",
+    "finding_id": "research-low-001",
+    "finding_type": "Recon:EC2/PortProbeUnprotectedPort",
+    "reason": "below-severity-threshold",
+    "severity": 4.0,
+    "status_code": 200
+  },
+  "lambda_log_events_observed": 9,
+  "stop_instances_events_in_test_window": 0,
+  "test_window_utc": {
+    "end": "2026-11-08T14:45:00Z",
+    "start": "2026-11-08T14:30:00Z"
+  }
+}

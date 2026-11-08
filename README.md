@@ -488,7 +488,19 @@ must include machine-readable AWS CLI output, deployment metadata, UTC timestamp
 and redacted supporting screenshots. Follow the
 [evidence collection protocol](docs/evidence-collection.md).
 
-No current live-deployment claim is made until that protocol has been completed.
+## Live validation record
+
+A controlled live deployment of commit `0e3b574` was completed in `us-east-1`
+on 8 November 2026 using the `research` environment and non-mutating `audit`
+response mode. Terraform created 42 managed resources, the documented baseline
+controls and response decisions were observed, the deployment reached zero drift,
+and all 42 resources were then destroyed. Direct post-destroy checks found no
+remaining named project resources; the KMS key is in AWS `PendingDeletion` for its
+configured 30-day safety window.
+
+See the [redacted evidence package](evidence/2026-11-08-0e3b574/README.md).
+GuardDuty, Security Hub, SNS email delivery, and enforce-mode EC2 containment were
+not enabled or claimed as live-tested in this run.
 
 ---
 # Destroy Infrastructure

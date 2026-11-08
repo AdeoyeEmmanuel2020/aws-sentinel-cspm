@@ -1,0 +1,14 @@
+{
+  "account_label": "redacted-isolated-research-account",
+  "aws_cli_version": "2.34.41",
+  "aws_provider_version": "5.100.0",
+  "commit_sha": "0e3b5745df5ed15ee9c523a7af0071a9cc18660f",
+  "environment": "research",
+  "guardduty_enabled": false,
+  "python_version": "3.14.3",
+  "region": "us-east-1",
+  "response_mode": "audit",
+  "security_hub_enabled": false,
+  "terraform_version": "1.13.5",
+  "test_date_utc": "2026-11-08"
+}

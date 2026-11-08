@@ -1,0 +1,7 @@
+Terraform destroy completed successfully.
+
+Destroy completion observed: 2026-11-08T14:41:31Z
+Resources destroyed: 42
+
+Terraform output:
+Destroy complete! Resources: 42 destroyed.

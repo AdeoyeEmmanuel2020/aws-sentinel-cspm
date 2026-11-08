@@ -1,0 +1,15 @@
+{
+  "access_analyzers_remaining": 0,
+  "cloudtrail_trails_remaining": 0,
+  "iam_roles_with_project_prefix_remaining": 0,
+  "kms": {
+    "deletion_date": "2026-12-08T14:41:11Z",
+    "state": "PendingDeletion"
+  },
+  "lambda_functions_remaining": 0,
+  "project_buckets_remaining": 0,
+  "sns_topics_remaining": 0,
+  "terraform_managed_resources_remaining": 0,
+  "verified_at_utc": "2026-11-08T14:41:31Z",
+  "vpcs_with_project_name_remaining": 0
+}

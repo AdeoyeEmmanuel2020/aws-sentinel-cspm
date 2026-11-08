@@ -1,0 +1,13 @@
+Terraform plan generated against the authenticated research account.
+
+Initial approved plan: 42 to add, 0 to change, 0 to destroy.
+Environment: research
+Region: us-east-1
+Response mode: audit
+GuardDuty: disabled
+Security Hub: disabled
+SNS email subscription: omitted
+
+After apply, a refresh-only comparison reported:
+
+No changes. Your infrastructure matches the configuration.

@@ -1,0 +1,13 @@
+Controlled live deployment summary
+
+First observed resource creation time: 2026-11-08T14:34:07Z
+Zero-drift observation time: 2026-11-08T14:39:39Z
+Managed resources created: 42
+Managed resources changed: 0
+Managed resources destroyed during apply: 0
+Post-apply drift: none
+
+The first apply process exceeded the local command-output window after creating
+most resources. Terraform state refresh showed three pending resources. A second
+apply completed the two CloudWatch monitoring resources, and a targeted apply
+completed the S3 lifecycle configuration. A final full plan reported no changes.
